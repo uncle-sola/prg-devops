@@ -59,7 +59,6 @@ function New-Password{
 }
 
 $Context = Get-AzureRmContext
-$KeyVault = Get-AzureRmKeyVault -VaultName $KeyVaultName
 $AzureDevOpsServicePrincipal = Get-AzureRmADServicePrincipal -ApplicationId $Context.Account.Id
 
 $AdServicePrincipal = Get-AzureRmADServicePrincipal -SearchString $AppRegistrationName
