@@ -71,6 +71,7 @@ Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
                 PartitionKey       = "aPartitionKey"
                 RowKey             = "aRowKey"
                 JsonString         = "aJsonObject"
+                $JsonFilePath      = "asdadaad"
             }
         }
     
