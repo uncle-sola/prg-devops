@@ -1,6 +1,6 @@
 # prg-devops
 
-[![Build status](https://sfa-gov-uk.visualstudio.com/Digital%20First%20Careers/_apis/build/status/PRG%20Shared/prg-devops?branchName=master)](https://sfa-gov-uk.visualstudio.com/Digital%20First%20Careers/_build/latest?definitionId=1301)  
+[![Build Status](https://dev.azure.com/prg-cloud/prg/_apis/build/status/prg-devops?branchName=master)](https://dev.azure.com/prg-cloud/prg/_build/latest?definitionId=11&branchName=master) 
 
 ARM templates, PowerShell modules and scripts, policies, documentation and other resources used in the PRG Azure pipelines
 
