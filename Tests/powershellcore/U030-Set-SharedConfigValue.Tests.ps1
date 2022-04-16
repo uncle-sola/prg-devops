@@ -31,6 +31,18 @@ Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
                 [CmdletBinding()]
                 param($ResourceGroupName, $Name)
             }
+            function Get-AzTableRow {
+                [CmdletBinding()]
+                param($Table)
+            }
+            function Add-AzTableRow {
+                [CmdletBinding()]
+                param($Table, $PartitionKey, $RowKey)
+            }
+            function Update-AzTableRow {
+                [CmdletBinding()]
+                param($Table)
+            }
             Mock Get-AzStorageAccount -MockWith { 
                 # This returns a new PSCustom object that implements all the properties that IStorageContest does
                 return [PSCustomObject]@{
