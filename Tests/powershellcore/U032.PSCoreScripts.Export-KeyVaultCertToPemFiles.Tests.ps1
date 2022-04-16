@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Export-KeyVaultCertToPemFiles unit tests" -Tag "Unit" {
+Describe "Export-KeyVaultCertToPemFiles unit tests" -Tag "DontRun" {
 
 
     Context "When passed a single output directory" {

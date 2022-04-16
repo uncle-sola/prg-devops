@@ -1,6 +1,6 @@
 ﻿Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Invoke-SmokeTestsOnWebApp unit tests" -Tag "Unit" {
+Describe "Invoke-SmokeTestsOnWebApp unit tests" -Tag "DontRun" {
 
 
 

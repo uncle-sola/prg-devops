@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
+Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "DontRun" {
 
 
     BeforeAll {

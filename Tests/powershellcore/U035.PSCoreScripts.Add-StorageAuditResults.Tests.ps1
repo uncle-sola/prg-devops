@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
+Describe "Add-StorageAuditResults unit tests" -Tag "DontRun" {
 
     Context "AppendToReport parameter used and object passed in is not of type CrossEnvironmentStorageAccountAudit" {
 
