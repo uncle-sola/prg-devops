@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
+Describe "Set-SharedConfigValue unit tests" -Tag "DontRun" {
 
 
 
