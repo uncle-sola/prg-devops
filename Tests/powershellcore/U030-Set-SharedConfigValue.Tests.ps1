@@ -7,6 +7,26 @@ Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
     Context "When updating from a string and the entry does not exist" {
 
         BeforeAll {
+
+            # Re-define the three Az cmdlets under test, as we can't mock them directly.
+            # They fire a ParameterBindingValidationException on both powershell core and powershell 5.
+            # suspect it's due to https://github.com/pester/Pester/issues/619
+            function New-AzStorageContext { 
+                [CmdletBinding()]
+                param($StorageAccountName, $StorageAccountKey)
+            }
+            function Get-AzStorageAccountKey {
+                [CmdletBinding()]
+                param($ResourceGroupName, $Name)
+            }
+            function Get-AzStorageTable {
+                [CmdletBinding()]
+                param($Context, $Name)
+            }
+            function New-AzStorageTable {
+                [CmdletBinding()]
+                param($Context, $Name)
+            }
             Mock Get-AzStorageAccount -MockWith { 
                 # This returns a new PSCustom object that implements all the properties that IStorageContest does
                 return [PSCustomObject]@{
