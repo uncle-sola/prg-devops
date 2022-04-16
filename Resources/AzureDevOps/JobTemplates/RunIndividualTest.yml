@@ -22,7 +22,7 @@ jobs:
     displayName: 'Install-Module -Name Az.Storage'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name Az.Storage -Force ' # Required when targetType == Inline
+      script: 'Install-Module -Name Az.Storage -Force  -AllowClobber' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name Az.Storage'
     inputs:
