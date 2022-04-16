@@ -40,6 +40,7 @@ param(
     [string] $DatabaseName
     )
 
+Write-Verbose "Supplied database name $($DatabaseName) Resource group $($ResourceGroup) cosomos account name $(CosmosDbAccountName)"
 $allDatabases = Get-AzResource -ResourceGroupName $ResourceGroup -ResourceName "$($CosmosDbAccountName)/sql/" -ResourceType "Microsoft.DocumentDb/databaseAccounts/apis/databases"  -ApiVersion 2016-03-31 -ErrorAction SilentlyContinue
 Write-Verbose "Retrieved $($allDatabases.Count) databases from $CosmosDbAccountName"
 $selectedDatabase = $allDatabases | Where-Object { $_.Properties.id -eq $DatabaseName }
