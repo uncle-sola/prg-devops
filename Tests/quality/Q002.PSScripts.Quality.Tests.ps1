@@ -30,7 +30,7 @@ Describe "Code quality tests" -ForEach @($Scripts) -Tag "Quality" {
             "PSAvoidUsingEmptyCatchBlock",
             "PSAvoidUsingPlainTextForPassword",
             "PSAvoidUsingConvertToSecureStringWithPlainText",
-            "PSUseShouldProcessForStateChangingFunctions"
+            "PSReviewUnusedParameter"
         )
         Write-Output "Exclude Rules Count: $($ExcludeRules.Count)"
         $Rules = Get-ScriptAnalyzerRule

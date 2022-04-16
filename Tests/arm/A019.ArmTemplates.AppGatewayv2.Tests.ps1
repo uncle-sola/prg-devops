@@ -11,7 +11,7 @@ $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\app-gateway-v2.json"
     BeforeAll{
       $TemplateParameters = @{
         appGatewayName      = "prg-foo-bar-ag"
-        subnetRef           = "/subscriptions/962cae10-2950-412a-93e3-d8ae92b17896/resourceGroups/prg-foo-bar-rg/providers/Microsoft.Network/virtualNetworks/prg-foo-bar-vnet/subnets/appgateway"
+        subnetRef           = "/subscriptions/f3b14109-a3de-4f54-9f58-46d891380a7e/resourceGroups/prg-foo-bar-rg/providers/Microsoft.Network/virtualNetworks/prg-foo-bar-vnet/subnets/appgateway"
         backendPools        = @( @{
                                     name = "mypool"
                                     fqdn = "foo.example.net"
