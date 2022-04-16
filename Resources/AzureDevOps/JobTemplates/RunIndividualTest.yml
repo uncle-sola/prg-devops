@@ -18,16 +18,16 @@ jobs:
       Contents: |
         **/TEST-${{ parameters.ResultsFileSuffix }}.xml
         **/CODECOVERAGE-${{ parameters.ResultsFileSuffix }}.xml
-  # - task: PowerShell@2
-  #   displayName: 'Install-Module -Name Az.Storage'
-  #   inputs:
-  #     targetType: inline
-  #     script: 'Install-Module -Name Az.Storage -Force ' # Required when targetType == Inline
-  # - task: PowerShell@2
-  #   displayName: 'Import-Module -Name Az.Storage'
-  #   inputs:
-  #     targetType: inline
-  #     script: 'Import-Module -Name Az.Storage -Scope Local' # Required when targetType == Inline
+  - task: PowerShell@2
+    displayName: 'Install-Module -Name Az.Storage'
+    inputs:
+      targetType: inline
+      script: 'Install-Module -Name Az.Storage -Force ' # Required when targetType == Inline
+  - task: PowerShell@2
+    displayName: 'Import-Module -Name Az.Storage'
+    inputs:
+      targetType: inline
+      script: 'Import-Module -Name Az.Storage -Scope Local' # Required when targetType == Inline
   # - task: PowerShell@2
   #   displayName: 'Install-Module -Name Az.ApiManagement'
   #   inputs:
