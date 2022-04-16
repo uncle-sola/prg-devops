@@ -37,7 +37,7 @@ Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
             }
             function Add-AzTableRow {
                 [CmdletBinding()]
-                param($Table, $PartitionKey, $RowKey)
+                param($Table, $RowKey)
             }
             function Update-AzTableRow {
                 [CmdletBinding()]
