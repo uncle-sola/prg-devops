@@ -27,6 +27,10 @@ Describe "Set-SharedConfigValue unit tests" -Tag "Unit" {
                 [CmdletBinding()]
                 param($Context, $Name)
             }
+            function Get-AzStorageAccount {
+                [CmdletBinding()]
+                param($ResourceGroupName, $Name)
+            }
             Mock Get-AzStorageAccount -MockWith { 
                 # This returns a new PSCustom object that implements all the properties that IStorageContest does
                 return [PSCustomObject]@{
