@@ -31,6 +31,6 @@ stages:
 - template: StageTemplates/RunTests.yml
   parameters:
     AzureSubscription: 'prg (f3b14109-a3de-4f54-9f58-46d891380a7e)'
-    Powershell5CodeCoveragePercentage: 45
-    PowershellCoreCodeCoveragePercentage: 25
+    Powershell5CodeCoveragePercentage: 38
+    PowershellCoreCodeCoveragePercentage: 30
 
