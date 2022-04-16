@@ -1,8 +1,8 @@
 parameters:
   ArmTemplateRoot: ''
   SolutionBaseName: ''
-  AzureSubscription: 'SFA-CDH-Dev/Test (962cae10-2950-412a-93e3-d8ae92b17896)'
-  TestArmTemplateScriptUrl: https://raw.githubusercontent.com/SkillsFundingAgency/prg-devops/master/PSScripts/Test-ArmTemplate.ps1
+  AzureSubscription: 'prg (f3b14109-a3de-4f54-9f58-46d891380a7e)'
+  TestArmTemplateScriptUrl: https://raw.githubusercontent.com/uncle-sola/prg-devops/master/PSScripts/Test-ArmTemplate.ps1
   TestArmTemplateScriptFilePath: $(System.DefaultWorkingDirectory)\Test-ArmTemplate.ps1
   TokenizeTestParameters: false
 

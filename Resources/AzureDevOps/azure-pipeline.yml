@@ -1,22 +1,18 @@
 variables:
 - name: SolutionBaseName
-  value: Dfc.DevOps
+  value: prg.DevOps
 
 resources:
   repositories:
   - repository: self
   - repository: prg-devops
     type: github
-    name: SkillsFundingAgency/prg-devops
-    endpoint: 'GitHub (ESFA)'
+    name: uncle-sola/prg-devops
+    endpoint: 'GitHub (PRG)'
     ref: refs/tags/v1.11.2
 
 pool:
-  name: 'NCS - CI and CD'
-  demands:
-    - PowerShell
-    - AzurePS
-    - docker
+    vmImage: 'windows-latest'
 
 trigger:
   branches:
@@ -34,7 +30,7 @@ pr:
 stages:
 - template: StageTemplates/RunTests.yml
   parameters:
-    AzureSubscription: 'SFA-CDH-Dev/Test (962cae10-2950-412a-93e3-d8ae92b17896)'
+    AzureSubscription: 'prg (f3b14109-a3de-4f54-9f58-46d891380a7e)'
     Powershell5CodeCoveragePercentage: 45
     PowershellCoreCodeCoveragePercentage: 25
 
