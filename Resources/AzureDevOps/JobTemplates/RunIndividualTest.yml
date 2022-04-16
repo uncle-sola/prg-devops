@@ -22,7 +22,7 @@ jobs:
     displayName: 'Install-Module -Name Az.Storage'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name Az.Storage -Force -AllowClobber ' # Required when targetType == Inline
+      script: 'Install-Module -Name Az.Storage -Force ' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name Az.Storage'
     inputs:
@@ -32,7 +32,7 @@ jobs:
     displayName: 'Install-Module -Name Az.ApiManagement'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name Az.ApiManagement -Force -AllowClobber ' # Required when targetType == Inline
+      script: 'Install-Module -Name Az.ApiManagement -Force' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name Az.ApiManagement'
     inputs:
@@ -42,7 +42,7 @@ jobs:
     displayName: 'Install-Module -Name Az.KeyVault'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name Az.KeyVault -Force -AllowClobber ' # Required when targetType == Inline
+      script: 'Install-Module -Name Az.KeyVault -Force' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name Az.KeyVault'
     inputs:
@@ -52,7 +52,7 @@ jobs:
     displayName: 'Install-Module -Name Az.Websites'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name Az.Websites -Force -AllowClobber ' # Required when targetType == Inline
+      script: 'Install-Module -Name Az.Websites -Force' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name Az.Websites'
     inputs:
@@ -62,7 +62,7 @@ jobs:
     displayName: 'Install-Module -Name CosmosDB'
     inputs:
       targetType: inline
-      script: 'Install-Module -Name CosmosDB -Force -AllowClobber ' # Required when targetType == Inline
+      script: 'Install-Module -Name CosmosDB -Force' # Required when targetType == Inline
   - task: PowerShell@2
     displayName: 'Import-Module -Name CosmosDB'
     inputs:
