@@ -26,7 +26,7 @@ Describe "Set-EsfaResourceGroupTags unit tests" -Tag "Unit" {
 
     It "Should update existing resource group if group exists with different tags" {
 
-        .\Set-EsfaResourceGroupTags -ResourceGroupName "prg-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services"
+        .\Set-EsfaResourceGroupTags -ResourceGroupName "prg-foobar-rg" -Environment "Dev/Test" -ParentBusiness "Karis Ministries" -ServiceOffering "Karis Ministries Services (PP)"
 
         Should -Invoke -CommandName Get-AzureRmResourceGroup -Exactly 1 -Scope It
         Should -Invoke -CommandName New-AzureRmResourceGroup -Exactly 0 -Scope It
