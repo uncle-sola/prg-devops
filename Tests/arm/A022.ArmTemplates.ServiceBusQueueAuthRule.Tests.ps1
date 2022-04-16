@@ -3,7 +3,7 @@ Describe "Service Bus Queue Authorization Rule (shared access policy) Deployment
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\ServiceBus\servicebus-queue-authrule.json"
 
 
@@ -12,7 +12,7 @@ Describe "Service Bus Queue Authorization Rule (shared access policy) Deployment
 
     BeforeAll {
       $TemplateParameters = @{
-        servicebusName        = "dfc-foo-bar-ns"
+        servicebusName        = "prg-foo-bar-ns"
         queueName             = "queue-name"
         authorizationRuleName = "myrule"
         rights                = @( "listen" )

@@ -16,7 +16,7 @@ Describe "Get-AppServiceAppSetting unit tests" -Tag "Unit" {
 
         Mock Write-Error
 
-        .\Get-AppServiceAppSetting -ResourceGroupName dfc-foo-bar-rg -AppServiceName dfc-foo-bar-as -AppSetting notasetting
+        .\Get-AppServiceAppSetting -ResourceGroupName prg-foo-bar-rg -AppServiceName prg-foo-bar-as -AppSetting notasetting
 
         Should -Invoke -CommandName Write-Error
 
@@ -26,7 +26,7 @@ Describe "Get-AppServiceAppSetting unit tests" -Tag "Unit" {
 
         $expected = @('##vso[task.setvariable variable=foo]bar')
 
-        $output = .\Get-AppServiceAppSetting -ResourceGroupName dfc-foo-bar-rg -AppServiceName dfc-foo-bar-as -AppSetting foo
+        $output = .\Get-AppServiceAppSetting -ResourceGroupName prg-foo-bar-rg -AppServiceName prg-foo-bar-as -AppSetting foo
 
         $output | Should -Be $expected
 

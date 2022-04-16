@@ -2,12 +2,12 @@ Describe "SQL Server Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\sql-server.json"
     $TemplateParametersDefault = @{
-      sqlServerName                         = "dfc-foo-bar-sql"
+      sqlServerName                         = "prg-foo-bar-sql"
       sqlServerAdminPassword                = "Not-a-real-password"
-      storageAccountName                    = "dfctesttemplatestr"
+      storageAccountName                    = "prgtesttemplatestr"
       sqlServerActiveDirectoryAdminLogin    = "SQL_ADMIN_GRP"
       sqlServerActiveDirectoryAdminObjectId = "12345678-abcd-abcd-abcd-1234567890ab"
     }
@@ -58,7 +58,7 @@ Describe "SQL Server Deployment Tests" -Tag "Acceptance" {
     It "Should be deployed successfully" {
 
       $TemplateParameters = $TemplateParametersDefault
-      $TemplateParameters['elasticPoolName'] = "dfc-foo-bar-epl"
+      $TemplateParameters['elasticPoolName'] = "prg-foo-bar-epl"
       $TestTemplateParams['TemplateParameterObject'] = $TemplateParameters
   
       $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams

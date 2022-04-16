@@ -11,16 +11,16 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcfoosharedstr"
-                        ResourceGroupName  = "dfc-foo-shared-rg"
+                        StorageAccountName = "prgfoosharedstr"
+                        ResourceGroupName  = "prg-foo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dssfoosharedstr"
                         ResourceGroupName  = "dss-foo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcbarsharedstr"
-                        ResourceGroupName  = "dfc-bar-shared-rg"
+                        StorageAccountName = "prgbarsharedstr"
+                        ResourceGroupName  = "prg-bar-shared-rg"
                     }
                 ) }
             Mock New-AzStorageContext
@@ -102,16 +102,16 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcfoosharedstr"
-                        ResourceGroupName  = "dfc-foo-shared-rg"
+                        StorageAccountName = "prgfoosharedstr"
+                        ResourceGroupName  = "prg-foo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dssfoosharedstr"
                         ResourceGroupName  = "dss-foo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcbarsharedstr"
-                        ResourceGroupName  = "dfc-bar-shared-rg"
+                        StorageAccountName = "prgbarsharedstr"
+                        ResourceGroupName  = "prg-bar-shared-rg"
                     }
                 ) }
             Mock New-AzStorageContext
@@ -182,9 +182,9 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
         
         It "should parse the servicename and environment segments from the storage account name if NCS naming convention is used" {
             $VerboseOutput = .\Add-StorageAuditResults.ps1 @Params -Verbose 4>&1
-            $VerboseOutput | Where-Object { $_.Message -eq "ServicePrefix is dfc, Environment is foo" } | Should -Not -Be $null
+            $VerboseOutput | Where-Object { $_.Message -eq "ServicePrefix is prg, Environment is foo" } | Should -Not -Be $null
             $VerboseOutput | Where-Object { $_.Message -eq "ServicePrefix is dss, Environment is foo" } | Should -Not -Be $null
-            $VerboseOutput | Where-Object { $_.Message -eq "ServicePrefix is dfc, Environment is bar" } | Should -Not -Be $null
+            $VerboseOutput | Where-Object { $_.Message -eq "ServicePrefix is prg, Environment is bar" } | Should -Not -Be $null
         }
 
         It "should output the LastModified property of the most recently modified container" {
@@ -234,16 +234,16 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcfoosharedstr"
-                        ResourceGroupName  = "dfc-foo-shared-rg"
+                        StorageAccountName = "prgfoosharedstr"
+                        ResourceGroupName  = "prg-foo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dssfoosharedstr"
                         ResourceGroupName  = "dss-foo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcbarsharedstr"
-                        ResourceGroupName  = "dfc-bar-shared-rg"
+                        StorageAccountName = "prgbarsharedstr"
+                        ResourceGroupName  = "prg-bar-shared-rg"
                     }
                 ) }
             Mock New-AzStorageContext
@@ -312,16 +312,16 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcwoosharedstr"
-                        ResourceGroupName  = "dfc-woo-shared-rg"
+                        StorageAccountName = "prgwoosharedstr"
+                        ResourceGroupName  = "prg-woo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dsswoosharedstr"
                         ResourceGroupName  = "dss-woo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcgarsharedstr"
-                        ResourceGroupName  = "dfc-gar-shared-rg"
+                        StorageAccountName = "prggarsharedstr"
+                        ResourceGroupName  = "prg-gar-shared-rg"
                     }
                 ) }
 
@@ -347,16 +347,16 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcfoosharedstr"
-                        ResourceGroupName  = "dfc-foo-shared-rg"
+                        StorageAccountName = "prgfoosharedstr"
+                        ResourceGroupName  = "prg-foo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dssfoosharedstr"
                         ResourceGroupName  = "dss-foo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcbarsharedstr"
-                        ResourceGroupName  = "dfc-bar-shared-rg"
+                        StorageAccountName = "prgbarsharedstr"
+                        ResourceGroupName  = "prg-bar-shared-rg"
                     }
                 ) }
             Mock New-AzStorageContext
@@ -422,20 +422,20 @@ Describe "Add-StorageAuditResults unit tests" -Tag "Unit" {
 
         BeforeEach {
             $Params.Remove("AppendToReport")
-            $Params["ServicePrefixes"] = @("dfc", "dss")
+            $Params["ServicePrefixes"] = @("prg", "dss")
 
             Mock Get-AzStorageAccount -MockWith { return @(
                     @{
-                        StorageAccountName = "dfcfoosharedstr"
-                        ResourceGroupName  = "dfc-foo-shared-rg"
+                        StorageAccountName = "prgfoosharedstr"
+                        ResourceGroupName  = "prg-foo-shared-rg"
                     },
                     @{
                         StorageAccountName = "dssfoosharedstr"
                         ResourceGroupName  = "dss-foo-shared-rg"
                     },
                     @{
-                        StorageAccountName = "dfcbarsharedstr"
-                        ResourceGroupName  = "dfc-bar-shared-rg"
+                        StorageAccountName = "prgbarsharedstr"
+                        ResourceGroupName  = "prg-bar-shared-rg"
                     },
                     @{
                         StorageAccountName = "dasbarsharedstr"

@@ -34,7 +34,7 @@ Describe "Set-SearchIndexers unit tests" -Tag "Unit" {
 
         $DefaultParams = @{ 
             SearchName        = 'mock'
-            ResourceGroupName = "dfc-foo-bar-rg"
+            ResourceGroupName = "prg-foo-bar-rg"
         }
     }
 

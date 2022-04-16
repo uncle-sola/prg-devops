@@ -2,7 +2,7 @@ Describe "Certificate Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\certificate.json"
   }
   
@@ -10,7 +10,7 @@ Describe "Certificate Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        keyVaultName            = "dfc-foo-bar-kv"
+        keyVaultName            = "prg-foo-bar-kv"
         keyVaultCertificateName = "foo.example.com"
       }
       $TestTemplateParams = @{

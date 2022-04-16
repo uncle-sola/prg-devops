@@ -3,7 +3,7 @@ Describe "App Service Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\app-service.json"
 
   }
@@ -12,8 +12,8 @@ Describe "App Service Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        appServiceName     = "dfc-foo-bar-as"
-        appServicePlanName = "dfc-test-template-asp"
+        appServiceName     = "prg-foo-bar-as"
+        appServicePlanName = "prg-test-template-asp"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName
@@ -34,8 +34,8 @@ Describe "App Service Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        appServiceName     = "dfc-foo-bar-fa"
-        appServicePlanName = "dfc-test-template-asp"
+        appServiceName     = "prg-foo-bar-fa"
+        appServicePlanName = "prg-test-template-asp"
         appServiceType     = "functionapp"
       }
       $TestTemplateParams = @{

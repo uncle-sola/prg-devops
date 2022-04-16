@@ -10,7 +10,7 @@ Describe "Clear-Cdn unit tests" -Tag "Unit" {
 
         Mock Unpublish-AzureRmCdnEndpointContent
 
-        .\Clear-Cdn -ResourceGroupName dfc-foo-bar-rg -CdnName dfc-foo-bar-cdn -EndpointName dfc-foo-bar-assets
+        .\Clear-Cdn -ResourceGroupName prg-foo-bar-rg -CdnName prg-foo-bar-cdn -EndpointName prg-foo-bar-assets
 
         Should -Invoke -CommandName Unpublish-AzureRmCdnEndpointContent
 

@@ -7,7 +7,7 @@ Audits high level usage of storage accounts.  Outputs number of containers, file
 Can audit multiple environments within a subscription.  Can accept the output from a previous audit and append to this allowing audits to be ran across multiple subscriptions and tenants.
 
 .PARAMETER EnvironmentNames
-An array of environment names.  Assumes that the DFC naming convention for storage accounts is followed, ie <service><environment><project>str, eg dfcfooprojectbarstr
+An array of environment names.  Assumes that the DFC naming convention for storage accounts is followed, ie <service><environment><project>str, eg prgfooprojectbarstr
 
 .PARAMETER AppendToReport
 (optional) The output from a previous run of this cmdlet.  Must be of type CrossEnvironmentStorageAccountAudit[]

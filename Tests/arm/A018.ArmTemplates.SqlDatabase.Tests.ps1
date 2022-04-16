@@ -2,11 +2,11 @@
 Describe "Sql Database Deployment Tests" -Tag "Acceptance" {
     BeforeAll {
         # common variables
-        $ResourceGroupName = "dfc-test-template-rg"
+        $ResourceGroupName = "prg-test-template-rg"
         $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\SqlServer\sql-database.json"
         $TemplateParametersDefault = @{
-            databaseName  = "dfc-foo-bar-db"
-            sqlServerName = "dfc-foo-bar-sql"
+            databaseName  = "prg-foo-bar-db"
+            sqlServerName = "prg-foo-bar-sql"
         }
     }
         

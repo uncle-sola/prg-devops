@@ -1,4 +1,4 @@
-# dfc-gulp-build steps template
+# prg-gulp-build steps template
 # Runs gulp task runner and optionally publish output
 # demands: npm & gulp
 

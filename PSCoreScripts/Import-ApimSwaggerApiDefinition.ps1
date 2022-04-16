@@ -35,7 +35,7 @@ The version set resource must already be created via ARM template
 [Optional]  The path to save the swagger file to if SwaggerSpecificationFile switch is used.
 
 .EXAMPLE
-Import-ApimSwaggerApiDefinition -ApimResourceGroup dfc-foo-bar-rg -InstanceName dfc-foo-bar-apim -ApiName bar -SwaggerSpecificationUrl "https://dfc-foo-bar-fa.azurewebsites.net/api/bar/api-definition" -SwaggerSpecificationFile -OutputFilePath $(System.DefaultWorkingDirectory)/SwaggerFile -Verbose
+Import-ApimSwaggerApiDefinition -ApimResourceGroup prg-foo-bar-rg -InstanceName prg-foo-bar-apim -ApiName bar -SwaggerSpecificationUrl "https://prg-foo-bar-fa.azurewebsites.net/api/bar/api-definition" -SwaggerSpecificationFile -OutputFilePath $(System.DefaultWorkingDirectory)/SwaggerFile -Verbose
 
 #>
 

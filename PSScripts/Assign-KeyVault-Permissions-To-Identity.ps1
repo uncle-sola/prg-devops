@@ -13,7 +13,7 @@ Name of the service principal
 
 .EXAMPLE
 Assign-KeyVault-Permissions-To-Identity.ps1 -KeyVaultName KeyVaultName -ServicePrincipalName ServicePrincipalName
-Assign-KeyVault-Permissions-To-Identity.ps1 -KeyVaultName dfc-dev-shared-kv -ServicePrincipalName dfc-dev-api-eventgridsubscriptions-fa -Verbose
+Assign-KeyVault-Permissions-To-Identity.ps1 -KeyVaultName prg-dev-shared-kv -ServicePrincipalName prg-dev-api-eventgridsubscriptions-fa -Verbose
 #>
 [CmdletBinding()]
 param(

@@ -3,7 +3,7 @@
 Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\keyvault.json"
 
   }
@@ -11,7 +11,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
   Context "When KeyVault deployed with just key vault name" {
     BeforeAll {
       $TemplateParameters = @{
-        keyVaultName = "dfc-foo-bar-kv"
+        keyVaultName = "prg-foo-bar-kv"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName

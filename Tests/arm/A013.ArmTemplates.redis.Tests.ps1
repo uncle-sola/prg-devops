@@ -3,7 +3,7 @@ Describe "Redis Cache Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\redis.json"
   }
   
@@ -11,7 +11,7 @@ Describe "Redis Cache Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        redisName = "dfc-foo-bar-rds"
+        redisName = "prg-foo-bar-rds"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName

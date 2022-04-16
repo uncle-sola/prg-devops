@@ -3,15 +3,15 @@ Describe "App Gateway Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll{
 # common variables
-$ResourceGroupName = "dfc-test-template-rg"
+$ResourceGroupName = "prg-test-template-rg"
 $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\app-gateway-v2.json"
   }
   
   Context "When an app gateway is deployed with just a single pool" {
     BeforeAll{
       $TemplateParameters = @{
-        appGatewayName      = "dfc-foo-bar-ag"
-        subnetRef           = "/subscriptions/962cae10-2950-412a-93e3-d8ae92b17896/resourceGroups/dfc-foo-bar-rg/providers/Microsoft.Network/virtualNetworks/dfc-foo-bar-vnet/subnets/appgateway"
+        appGatewayName      = "prg-foo-bar-ag"
+        subnetRef           = "/subscriptions/962cae10-2950-412a-93e3-d8ae92b17896/resourceGroups/prg-foo-bar-rg/providers/Microsoft.Network/virtualNetworks/prg-foo-bar-vnet/subnets/appgateway"
         backendPools        = @( @{
                                     name = "mypool"
                                     fqdn = "foo.example.net"
@@ -29,7 +29,7 @@ $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\app-gateway-v2.json"
                                     paths       = @( "/dummy/*" )
                               } )
         publicIpAddressId   = "1.2.3.4"
-        userAssignedIdentityName = "dfc-test-template-uim"
+        userAssignedIdentityName = "prg-test-template-uim"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName

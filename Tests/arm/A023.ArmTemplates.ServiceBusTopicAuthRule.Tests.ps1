@@ -2,7 +2,7 @@ Describe "Service Bus Topic Authorization Rule (shared access policy) Deployment
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\ServiceBus\servicebus-topic-authrule.json"
 
   }
@@ -11,7 +11,7 @@ Describe "Service Bus Topic Authorization Rule (shared access policy) Deployment
     BeforeAll {
 
       $TemplateParameters = @{
-        servicebusName        = "dfc-foo-bar-ns"
+        servicebusName        = "prg-foo-bar-ns"
         topicName             = "topic-name"
         authorizationRuleName = "myrule"
         rights                = @( "listen" )

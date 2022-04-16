@@ -30,19 +30,19 @@ The APIM operation id. Only required if applying policy to operation scope
 
 .EXAMPLE
 #Set tenant scoped policy
-Set-ApimPolicy -PolicyScope tenant -ApimResourceGroup dfc-foo-bar-rg -ApimServiceName dfc-foo-bar-apim -PolicyFilePath some-file
+Set-ApimPolicy -PolicyScope tenant -ApimResourceGroup prg-foo-bar-rg -ApimServiceName prg-foo-bar-apim -PolicyFilePath some-file
 
 #Set product scoped policy
-Set-ApimPolicy -PolicyScope product -ApimResourceGroup dfc-foo-bar-rg -ApimServiceName dfc-foo-bar-apim -PolicyFilePath some-file -ProductId productid
+Set-ApimPolicy -PolicyScope product -ApimResourceGroup prg-foo-bar-rg -ApimServiceName prg-foo-bar-apim -PolicyFilePath some-file -ProductId productid
 
 #Set api scoped policy
-Set-ApimPolicy -PolicyScope api -ApimResourceGroup dfc-foo-bar-rg -ApimServiceName dfc-foo-bar-apim -PolicyFilePath some-file -ApiId apiid
+Set-ApimPolicy -PolicyScope api -ApimResourceGroup prg-foo-bar-rg -ApimServiceName prg-foo-bar-apim -PolicyFilePath some-file -ApiId apiid
 
 #Set operation scoped policy
-Set-ApimPolicy -PolicyScope operation -ApimResourceGroup dfc-foo-bar-rg -ApimServiceName dfc-foo-bar-apim -PolicyFilePath some-file -ApiId apiid -OperationId operationid
+Set-ApimPolicy -PolicyScope operation -ApimResourceGroup prg-foo-bar-rg -ApimServiceName prg-foo-bar-apim -PolicyFilePath some-file -ApiId apiid -OperationId operationid
 
 #Return a list of all valid product, api and operation IDs available on the given service
-Set-ApimPolicy -PolicyScope listavailable -ApimResourceGroup dfc-foo-bar-rg -ApimServiceName dfc-foo-bar-apim
+Set-ApimPolicy -PolicyScope listavailable -ApimResourceGroup prg-foo-bar-rg -ApimServiceName prg-foo-bar-apim
 #>
 [CmdletBinding()]
 Param(

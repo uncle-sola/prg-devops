@@ -29,18 +29,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -54,13 +54,13 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
 
         BeforeEach {
             Mock Get-AzWebApp -MockWith { return @{
-                    Name          = 'dfc-foo-as'
+                    Name          = 'prg-foo-as'
                     Kind          = 'app'
-                    ResourceGroup = 'dfc-foo-rg'
+                    ResourceGroup = 'prg-foo-rg'
                     Type          = 'Microsoft.Web/sites'
-                    Id            = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    Id            = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                     SiteConfig    = @{ AppSettings = @(
-                            @{ Name = 'DatabaseVersion'; Value = 'dfc-foo-sitefinitydb' }
+                            @{ Name = 'DatabaseVersion'; Value = 'prg-foo-sitefinitydb' }
                         ) 
                     }
                 } }
@@ -69,26 +69,26 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
 
         It "should throw an exception if SQL server does not exist" {
             { 
-                ./Copy-SitefinityDatabase -ServerName not-a-sql-server -AppServiceName dfc-foo-as  -ReleaseNumber 123
+                ./Copy-SitefinityDatabase -ServerName not-a-sql-server -AppServiceName prg-foo-as  -ReleaseNumber 123
             } | Should -Throw "Could not find SQL server not-a-sql-server"
         }
 
         It "should throw an exception if app service does not exist" {
             { 
-                ./Copy-SitefinityDatabase -AppServiceName not-an-app-service -ServerName dfc-foo-sql -ReleaseNumber 123
+                ./Copy-SitefinityDatabase -AppServiceName not-an-app-service -ServerName prg-foo-sql -ReleaseNumber 123
             } | Should -Throw "Could not find app service not-an-app-service"
         }
 
         It "should throw an exception if it cannot get the release number" {
             { 
-                ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql
+                ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql
             } | Should -Throw "Cannot find environment variable RELEASE_RELEASENAME and no ReleaseNumber passed in"
         }
 
         It "should throw an exception if the current database does not exist" {
             { 
-                ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql -ReleaseNumber 123
-            } | Should -Throw "Could not find the current database dfc-foo-sitefinitydb"
+                ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql -ReleaseNumber 123
+            } | Should -Throw "Could not find the current database prg-foo-sitefinitydb"
         }
     }
 
@@ -119,18 +119,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -144,72 +144,72 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
 
         BeforeEach {
             Mock Get-AzWebApp -MockWith { return @{
-                    Name          = 'dfc-foo-as'
+                    Name          = 'prg-foo-as'
                     Kind          = 'app'
-                    ResourceGroup = 'dfc-foo-rg'
+                    ResourceGroup = 'prg-foo-rg'
                     Type          = 'Microsoft.Web/sites'
-                    Id            = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    Id            = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                     SiteConfig    = @{ AppSettings = @(
-                            @{ Name = 'DatabaseVersion'; Value = 'dfc-foo-sitefinitydb' }
+                            @{ Name = 'DatabaseVersion'; Value = 'prg-foo-sitefinitydb' }
                         ) 
                     }
                 } }
 
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb" } -MockWith { return @{
-                    DatabaseName      = 'dfc-foo-sitefinitydb'
-                    ServerName        = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql/databases/dfc-foo-sitefinitydb'
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb" } -MockWith { return @{
+                    DatabaseName      = 'prg-foo-sitefinitydb'
+                    ServerName        = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql/databases/prg-foo-sitefinitydb'
                     SkuName           = 'Standard'
                     ElasticPoolName   = $null
                 } }
 
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb-r123" } -MockWith { return $null }
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb-r123" } -MockWith { return $null }
 
             $env:RELEASE_RELEASENAME = "199-2"
 
-            ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql
+            ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql
 
             Remove-Item Env:\RELEASE_RELEASENAME
         }
 
         It "should get the sql server resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-sql" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-sql" }
         }
 
         It "should get the web app resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-as" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-as" }
         }
 
         It "should get the web app details" {
             Should -Invoke -CommandName Get-AzWebApp -Exactly 1 -ParameterFilter {
-                $Name -eq "dfc-foo-as" -and `
-                    $ResourceGroupName -eq "dfc-foo-rg"
+                $Name -eq "prg-foo-as" -and `
+                    $ResourceGroupName -eq "prg-foo-rg"
             }
         }
 
         It "should get the existing table" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb"
             }
         }
 
-        It "should look for a copy database called dfc-foo-sitefinitydb-r199" {
+        It "should look for a copy database called prg-foo-sitefinitydb-r199" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r199"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r199"
             }
         }
 
-        It "Should copy dfc-foo-sitefinitydb to dfc-foo-sitefinitydb-r199" {
+        It "Should copy prg-foo-sitefinitydb to prg-foo-sitefinitydb-r199" {
             Should -Invoke -CommandName New-AzSqlDatabaseCopy -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb" -and `
-                    $CopyDatabaseName -eq "dfc-foo-sitefinitydb-r199" -and `
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb" -and `
+                    $CopyDatabaseName -eq "prg-foo-sitefinitydb-r199" -and `
                     $ElasticPoolName -eq $null
             }
         }
@@ -242,18 +242,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -270,7 +270,7 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
             Mock Get-AzWebApp -MockWith { return $null }
 
             { 
-                ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql -ReleaseNumber 123
+                ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql -ReleaseNumber 123
             } | Should -throw "Could not determine current database version from DatabaseVersion app setting"
         }
 
@@ -303,18 +303,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -329,68 +329,68 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
         BeforeEach {
 
             Mock Get-AzWebApp -MockWith { return @{
-                    Name          = 'dfc-foo-as'
+                    Name          = 'prg-foo-as'
                     Kind          = 'app'
-                    ResourceGroup = 'dfc-foo-rg'
+                    ResourceGroup = 'prg-foo-rg'
                     Type          = 'Microsoft.Web/sites'
-                    Id            = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    Id            = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                     SiteConfig    = @{ AppSettings = @(
-                            @{ Name = 'DatabaseVersion'; Value = 'dfc-foo-sitefinitydb' }
+                            @{ Name = 'DatabaseVersion'; Value = 'prg-foo-sitefinitydb' }
                         ) 
                     }
                 } }
     
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb" } -MockWith { return @{
-                    DatabaseName      = 'dfc-foo-sitefinitydb'
-                    ServerName        = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql/databases/dfc-foo-sitefinitydb'
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb" } -MockWith { return @{
+                    DatabaseName      = 'prg-foo-sitefinitydb'
+                    ServerName        = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql/databases/prg-foo-sitefinitydb'
                     SkuName           = 'Standard'
                     ElasticPoolName   = $null
                 } }
 
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb-r123" } -MockWith { return $null }
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb-r123" } -MockWith { return $null }
 
-            ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql -ReleaseNumber 123
+            ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql -ReleaseNumber 123
 
         }
         It "should get the sql server resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-sql" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-sql" }
         }
 
         It "should get the web app resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-as" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-as" }
         }
 
         It "should get the web app details" {
             Should -Invoke -CommandName Get-AzWebApp -Exactly 1 -ParameterFilter {
-                $Name -eq "dfc-foo-as" -and `
-                    $ResourceGroupName -eq "dfc-foo-rg"
+                $Name -eq "prg-foo-as" -and `
+                    $ResourceGroupName -eq "prg-foo-rg"
             }
         }
         
         It "should get the existing table" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb"
             }
         }
 
-        It "should look for a copy database called dfc-foo-sitefinitydb-r123" {
+        It "should look for a copy database called prg-foo-sitefinitydb-r123" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r123"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r123"
             }
         }
 
-        It "Should copy dfc-foo-sitefinitydb to dfc-foo-sitefinitydb-r123" {
+        It "Should copy prg-foo-sitefinitydb to prg-foo-sitefinitydb-r123" {
             Should -Invoke -CommandName New-AzSqlDatabaseCopy -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb" -and `
-                    $CopyDatabaseName -eq "dfc-foo-sitefinitydb-r123" -and `
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb" -and `
+                    $CopyDatabaseName -eq "prg-foo-sitefinitydb-r123" -and `
                     $ElasticPoolName -eq $null
             }
         }
@@ -424,18 +424,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -449,70 +449,70 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
 
         BeforeEach {
             Mock Get-AzWebApp -MockWith { return @{
-                    Name          = 'dfc-foo-as'
+                    Name          = 'prg-foo-as'
                     Kind          = 'app'
-                    ResourceGroup = 'dfc-foo-rg'
+                    ResourceGroup = 'prg-foo-rg'
                     Type          = 'Microsoft.Web/sites'
-                    Id            = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    Id            = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                     SiteConfig    = @{ AppSettings = @(
-                            @{ Name = 'DatabaseVersion'; Value = 'dfc-foo-sitefinitydb-r100' }
+                            @{ Name = 'DatabaseVersion'; Value = 'prg-foo-sitefinitydb-r100' }
                         ) 
                     }
                 } }
     
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb-r100" } -MockWith { return @{
-                    DatabaseName      = 'dfc-foo-sitefinitydb'
-                    ServerName        = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql/databases/dfc-foo-sitefinitydb-r100'
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb-r100" } -MockWith { return @{
+                    DatabaseName      = 'prg-foo-sitefinitydb'
+                    ServerName        = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql/databases/prg-foo-sitefinitydb-r100'
                     SkuName           = 'ElasticPool'
-                    ElasticPoolName   = 'dfc-foo-epl'
+                    ElasticPoolName   = 'prg-foo-epl'
                 } }
 
-            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "dfc-foo-sitefinitydb-r124" } -MockWith { return $null }
+            Mock Get-AzSqlDatabase -ParameterFilter { $DatabaseName -eq "prg-foo-sitefinitydb-r124" } -MockWith { return $null }
 
-            ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql.database.windows.net -ReleaseNumber 124
+            ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql.database.windows.net -ReleaseNumber 124
 
         }
 
         It "should get the sql server resource description using name only" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-sql" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-sql" }
         }
 
         It "should get the web app resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-as" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-as" }
         }
 
         It "should get the web app details" {
             Should -Invoke -CommandName Get-AzWebApp -Exactly 1 -ParameterFilter {
-                $Name -eq "dfc-foo-as" -and `
-                    $ResourceGroupName -eq "dfc-foo-rg"
+                $Name -eq "prg-foo-as" -and `
+                    $ResourceGroupName -eq "prg-foo-rg"
             }
         }
         
         It "should get the existing table" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r100"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r100"
             }
         }
 
-        It "should look for a copy database called dfc-foo-sitefinitydb-r124" {
+        It "should look for a copy database called prg-foo-sitefinitydb-r124" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r124"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r124"
             }
         }
 
-        It "Should copy dfc-foo-sitefinitydb to dfc-foo-sitefinitydb-r124 in elastic pool" {
+        It "Should copy prg-foo-sitefinitydb to prg-foo-sitefinitydb-r124 in elastic pool" {
             Should -Invoke -CommandName New-AzSqlDatabaseCopy -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r100" -and `
-                    $CopyDatabaseName -eq "dfc-foo-sitefinitydb-r124" -and `
-                    $ElasticPoolName -eq "dfc-foo-epl"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r100" -and `
+                    $CopyDatabaseName -eq "prg-foo-sitefinitydb-r124" -and `
+                    $ElasticPoolName -eq "prg-foo-epl"
             }
         }
 
@@ -545,18 +545,18 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
                 param($ResourceGroupName, $ServerName, $DatabaseName, $CopyDatabaseName, $ElasticPoolName)
             }
 
-            # mock Get-AzResource: return valid object for dfc-foo-sql and dfc-foo-as, return null if not one of these
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-sql' } -MockWith { return @{
-                    Name              = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
+            # mock Get-AzResource: return valid object for prg-foo-sql and prg-foo-as, return null if not one of these
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-sql' } -MockWith { return @{
+                    Name              = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Sql/servers'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql'
                 } }
-            Mock Get-AzResource -ParameterFilter { $Name -eq 'dfc-foo-as' } -MockWith { return @{
-                    Name              = 'dfc-foo-as'
-                    ResourceGroupName = 'dfc-foo-rg'
+            Mock Get-AzResource -ParameterFilter { $Name -eq 'prg-foo-as' } -MockWith { return @{
+                    Name              = 'prg-foo-as'
+                    ResourceGroupName = 'prg-foo-rg'
                     ResourceType      = 'Microsoft.Web/sites'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                 } }
             Mock Get-AzResource -MockWith { return $null }
 
@@ -571,57 +571,57 @@ Describe "Copy-SitefinityDatabase unit tests" -Tag "Unit" {
         BeforeEach {
 
             Mock Get-AzWebApp -MockWith { return @{
-                    Name          = 'dfc-foo-as'
+                    Name          = 'prg-foo-as'
                     Kind          = 'app'
-                    ResourceGroup = 'dfc-foo-rg'
+                    ResourceGroup = 'prg-foo-rg'
                     Type          = 'Microsoft.Web/sites'
-                    Id            = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providersMicrosoft.Web/sites/dfc-foo-as'
+                    Id            = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providersMicrosoft.Web/sites/prg-foo-as'
                     SiteConfig    = @{ AppSettings = @(
-                            @{ Name = 'DatabaseVersion'; Value = 'dfc-foo-sitefinitydb-r101' }
+                            @{ Name = 'DatabaseVersion'; Value = 'prg-foo-sitefinitydb-r101' }
                         ) 
                     }
                 } }
     
             Mock Get-AzSqlDatabase -MockWith { return @{
-                    DatabaseName      = 'dfc-foo-sitefinitydb-r1xx'
-                    ServerName        = 'dfc-foo-sql'
-                    ResourceGroupName = 'dfc-foo-rg'
-                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/dfc-foo-rg/providers/Microsoft.Sql/servers/dfc-foo-sql/databases/dfc-foo-sitefinitydb-r1xx'
+                    DatabaseName      = 'prg-foo-sitefinitydb-r1xx'
+                    ServerName        = 'prg-foo-sql'
+                    ResourceGroupName = 'prg-foo-rg'
+                    ResourceId        = '/subscriptions/mock-sub/resourceGroups/prg-foo-rg/providers/Microsoft.Sql/servers/prg-foo-sql/databases/prg-foo-sitefinitydb-r1xx'
                     SkuName           = 'Standard'
                 } }
 
-            ./Copy-SitefinityDatabase -AppServiceName dfc-foo-as -ServerName dfc-foo-sql -ReleaseNumber 125
+            ./Copy-SitefinityDatabase -AppServiceName prg-foo-as -ServerName prg-foo-sql -ReleaseNumber 125
 
         }
 
         It "should get the sql server resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-sql" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-sql" }
         }
 
         It "should get the web app resource description" {
-            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "dfc-foo-as" }
+            Should -Invoke -CommandName Get-AzResource -Exactly 1 -ParameterFilter { $Name -eq "prg-foo-as" }
         }
 
         It "should get the web app details" {
             Should -Invoke -CommandName Get-AzWebApp -Exactly 1 -ParameterFilter {
-                $Name -eq "dfc-foo-as" -and `
-                    $ResourceGroupName -eq "dfc-foo-rg"
+                $Name -eq "prg-foo-as" -and `
+                    $ResourceGroupName -eq "prg-foo-rg"
             }
         }
         
         It "should get the existing table" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r101"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r101"
             }
         }
 
-        It "should look for a copy database called dfc-foo-sitefinitydb-r125" {
+        It "should look for a copy database called prg-foo-sitefinitydb-r125" {
             Should -Invoke -CommandName Get-AzSqlDatabase -Exactly 1 -ParameterFilter {
-                $ResourceGroupName -eq "dfc-foo-rg" -and `
-                    $ServerName -eq "dfc-foo-sql" -and `
-                    $DatabaseName -eq "dfc-foo-sitefinitydb-r125"
+                $ResourceGroupName -eq "prg-foo-rg" -and `
+                    $ServerName -eq "prg-foo-sql" -and `
+                    $DatabaseName -eq "prg-foo-sitefinitydb-r125"
             }
         }
 

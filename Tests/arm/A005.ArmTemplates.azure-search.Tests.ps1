@@ -1,6 +1,6 @@
 BeforeAll {
   # common variables
-  $ResourceGroupName = "dfc-test-template-rg"
+  $ResourceGroupName = "prg-test-template-rg"
   $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\azure-search.json"
 }
 
@@ -9,7 +9,7 @@ Describe "Azure Search Deployment Tests" -Tag "Acceptance" {
   Context "When Azure Search is deployed with just search name" {
     BeforeAll {
       $TemplateParameters = @{
-        azureSearchName = "dfc-foo-bar-sch-01"
+        azureSearchName = "prg-foo-bar-sch-01"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName
@@ -27,7 +27,7 @@ Describe "Azure Search Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        azureSearchName = "dfc-foo-bar-sch-02"
+        azureSearchName = "prg-foo-bar-sch-02"
         azureSearchSku  = "standard"
       }
       $TestTemplateParams = @{
@@ -47,7 +47,7 @@ Describe "Azure Search Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        azureSearchName           = "dfc-foo-bar-sch-03"
+        azureSearchName           = "prg-foo-bar-sch-03"
         azureSearchSku            = "standard2"
         azureSearchReplicaCount   = 2
         azureSearchPartitionCount = 2

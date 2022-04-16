@@ -95,8 +95,8 @@ Describe "New-CosmosDbAccountCollections unit tests" -Tag "Unit" {
 '@
 
         $DefaultParams = @{ 
-            CosmosDbAccountName = 'dfc-foo-bar-cdb'
-            ResourceGroupName   = "dfc-foo-bar-rg"
+            CosmosDbAccountName = 'prg-foo-bar-cdb'
+            ResourceGroupName   = "prg-foo-bar-rg"
         }
     }
 

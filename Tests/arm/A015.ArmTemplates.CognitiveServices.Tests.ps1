@@ -2,7 +2,7 @@ Describe "Cognitive Services account Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\cognitive-services.json"
   }
   
@@ -10,7 +10,7 @@ Describe "Cognitive Services account Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        cognitiveServiceName = "dfc-foo-bar-cog-01"
+        cognitiveServiceName = "prg-foo-bar-cog-01"
         cognitiveServiceType = "Bing.SpellCheck.v7" # global location
       }
       $TestTemplateParams = @{
@@ -31,7 +31,7 @@ Describe "Cognitive Services account Tests" -Tag "Acceptance" {
     
     BeforeAll {
       $TemplateParameters = @{
-        cognitiveServiceName = "dfc-foo-bar-cog-02"
+        cognitiveServiceName = "prg-foo-bar-cog-02"
         cognitiveServiceType = "Face" # local location
       }
       $TestTemplateParams = @{

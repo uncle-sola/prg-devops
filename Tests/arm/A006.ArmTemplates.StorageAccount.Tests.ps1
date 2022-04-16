@@ -2,14 +2,14 @@ Describe "Storage Account Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\storage-account.json"
   }
 
   Context "When a storage account deployed with just name" {
     BeforeAll {
       $TemplateParameters = @{
-        storageAccountName = "dfcfoobarstr"
+        storageAccountName = "prgfoobarstr"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName

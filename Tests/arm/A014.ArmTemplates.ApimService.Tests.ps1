@@ -3,7 +3,7 @@ Describe "Apim Service Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
         # common variables
-        $ResourceGroupName = "dfc-test-template-rg"
+        $ResourceGroupName = "prg-test-template-rg"
         $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\apim-service.json"
     }
   
@@ -12,7 +12,7 @@ Describe "Apim Service Deployment Tests" -Tag "Acceptance" {
         BeforeAll {
             $TemplateParameters = @{
                 adminEmail       = "foo@bar.com"
-                apimServiceName  = "dfc-foo-bar-apim"
+                apimServiceName  = "prg-foo-bar-apim"
                 environmentName  = "foo"
                 organizationName = "Foo Bar"
             }

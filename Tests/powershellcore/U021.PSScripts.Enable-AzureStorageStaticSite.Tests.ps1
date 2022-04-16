@@ -8,7 +8,7 @@ Describe "Enable-AzureStorageStaticSite unit tests" -Tag "Unit" {
     # Test-Connection returns a "MethodInvocationException: Exception calling "GetParamBlock" with "1" argument(s)" exception
     It "Should call the Azure cmdlets" -Tag "DontRun" {
 
-        $strname = "dfcfoobarstr"
+        $strname = "prgfoobarstr"
         Mock New-AzStorageContext
         Mock Test-Connection -MockWith { return $true }
         Mock Enable-AzStorageStaticWebsite

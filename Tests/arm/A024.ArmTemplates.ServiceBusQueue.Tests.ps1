@@ -3,14 +3,14 @@ Describe "Service Bus Queue Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\ServiceBus\servicebus-queue.json"
   }
   Context "When deploying a queue to a Service Bus Namespace" {
 
     BeforeAll {
       $TemplateParameters = @{
-        serviceBusNamespaceName = "dfc-foo-bar-ns"
+        serviceBusNamespaceName = "prg-foo-bar-ns"
         queueName               = "a-queue-name"
       }
       $TestTemplateParams = @{

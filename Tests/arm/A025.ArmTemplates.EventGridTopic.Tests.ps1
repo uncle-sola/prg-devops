@@ -3,7 +3,7 @@ Describe "Event Grid Topic Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\eventgrid-topic.json"
   }
 
@@ -11,7 +11,7 @@ Describe "Event Grid Topic Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        eventgridTopicName = "dfc-foo-bar-egt"
+        eventgridTopicName = "prg-foo-bar-egt"
         eventgridTopicSku  = "basic"
       }
   

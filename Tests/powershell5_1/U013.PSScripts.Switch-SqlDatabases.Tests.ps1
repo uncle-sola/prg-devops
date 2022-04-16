@@ -9,7 +9,7 @@ Describe "Switch-SqlDatabases unit tests" -Tag "Unit" {
     BeforeAll {
         Mock Set-AzureRmSqlDatabase
         Mock Get-AzureRmSqlDatabase {
-            $mock = '{ "ResourceGroupName": "dfc-foo-bar-rg", "ServerName": "dfc-foo-bar-sql", "DatabaseName": "dfc-foo-bar-db", "Location": "westeurope" }'
+            $mock = '{ "ResourceGroupName": "prg-foo-bar-rg", "ServerName": "prg-foo-bar-sql", "DatabaseName": "prg-foo-bar-db", "Location": "westeurope" }'
             if ($global:NumDatabaseExists -gt 0) {
                 $global:NumDatabaseExists -= 1
                 return ConvertFrom-Json $mock
@@ -19,7 +19,7 @@ Describe "Switch-SqlDatabases unit tests" -Tag "Unit" {
 
     It "Should do a single check and a single rename if the existing database does not exist" {
 
-        .\Switch-SqlDatabases -ResourceGroupName dfc-foo-bar-rg -SQLServerName dfc-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
+        .\Switch-SqlDatabases -ResourceGroupName prg-foo-bar-rg -SQLServerName prg-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
 
         Should -Invoke -CommandName Get-AzureRmSqlDatabase -Exactly 1 -Scope It
         Should -Invoke -CommandName Set-AzureRmSqlDatabase -Exactly 1 -Scope It
@@ -30,7 +30,7 @@ Describe "Switch-SqlDatabases unit tests" -Tag "Unit" {
 
         $global:NumDatabaseExists = 1
 
-        .\Switch-SqlDatabases -ResourceGroupName dfc-foo-bar-rg -SQLServerName dfc-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
+        .\Switch-SqlDatabases -ResourceGroupName prg-foo-bar-rg -SQLServerName prg-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
 
         Should -Invoke -CommandName Get-AzureRmSqlDatabase -Exactly 2 -Scope It
         Should -Invoke -CommandName Set-AzureRmSqlDatabase -Exactly 2 -Scope It
@@ -41,7 +41,7 @@ Describe "Switch-SqlDatabases unit tests" -Tag "Unit" {
 
         $global:NumDatabaseExists = 3
 
-        .\Switch-SqlDatabases -ResourceGroupName dfc-foo-bar-rg -SQLServerName dfc-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
+        .\Switch-SqlDatabases -ResourceGroupName prg-foo-bar-rg -SQLServerName prg-foo-bar-sql -ExistingDatabaseName foobar-db -ReplacementDatabaseName foobar-new
 
         Should -Invoke -CommandName Get-AzureRmSqlDatabase -Exactly 4 -Scope It
         Should -Invoke -CommandName Set-AzureRmSqlDatabase -Exactly 2 -Scope It

@@ -6,7 +6,7 @@ Describe "Set-CorsOnStorageAccount unit tests" -Tag "Unit" {
 
     It "Should call the Azure cmdlets" {
 
-        $strname = "dfcfoobarstr"
+        $strname = "prgfoobarstr"
         $strkey  = "foo="
         $origin  = "foo.example.org"
         

@@ -3,12 +3,12 @@ Describe "CDN Endpoint Deployment Tests" -Tag "Acceptance" {
     
     BeforeAll {
         # common variables
-        $ResourceGroupName = "dfc-test-template-rg"
+        $ResourceGroupName = "prg-test-template-rg"
         $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\CDN\cdn-endpoint.json"
         $TemplateParametersDefault = @{
-            cdnProfileName  = "dfc-foo-shared-cdn"
-            cdnEndPointName = "dfc-foo-bar-assets"
-            originHostName  = "https://dfcfoobarstr.z6.web.core.windows.net/"
+            cdnProfileName  = "prg-foo-shared-cdn"
+            cdnEndPointName = "prg-foo-bar-assets"
+            originHostName  = "https://prgfoobarstr.z6.web.core.windows.net/"
         }
     }
 

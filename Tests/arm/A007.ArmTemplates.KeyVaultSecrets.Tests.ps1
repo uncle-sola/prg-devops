@@ -2,7 +2,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\KeyVault\keyvault-secrets.json"
   }
 
@@ -10,7 +10,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll{
       $TemplateParameters = @{
-        keyVaultName = "dfc-foo-bar-kv"
+        keyVaultName = "prg-foo-bar-kv"
         secrets      = [Newtonsoft.Json.JsonConvert]::DeserializeObject('[{ "name": "foo", "secret": "bar", "type": "" }]')
       }
       $TestTemplateParams = @{
@@ -31,7 +31,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
   Context "When a multiple secrets added" {
     BeforeAll{
       $TemplateParameters = @{
-        keyVaultName = "dfc-foo-bar-kv"
+        keyVaultName = "prg-foo-bar-kv"
         secrets      = [Newtonsoft.Json.JsonConvert]::DeserializeObject('[{ "name": "foo", "secret": "bar", "type": "" },
                         { "name": "foo2", "secret": "another secret", "type": "text/plain" }]')
       }

@@ -3,7 +3,7 @@ Describe "App Service Plan Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll{
 # common variables
-$ResourceGroupName = "dfc-test-template-rg"
+$ResourceGroupName = "prg-test-template-rg"
 $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\application-insights.json"
   }
   
@@ -11,7 +11,7 @@ $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\application-insights.json"
 
     BeforeAll{
       $TemplateParameters = @{
-        appInsightsName = "dfc-foo-bar-ai"
+        appInsightsName = "prg-foo-bar-ai"
       }
       $TestTemplateParams = @{
         ResourceGroupName       = $ResourceGroupName

@@ -16,7 +16,7 @@ Storage Account name
 Container to create if applicable
 
 .EXAMPLE
-Set-StorageContainer.ps1 -ResourceGroupName dfc-foo-bar-rg -StorageAccountName dfcfoobarstr -ContainerName mycontainer
+Set-StorageContainer.ps1 -ResourceGroupName prg-foo-bar-rg -StorageAccountName prgfoobarstr -ContainerName mycontainer
 
 #>
 

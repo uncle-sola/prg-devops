@@ -3,7 +3,7 @@ Describe "Event Grid Subscription Tests" -Tag "Acceptance" {
   BeforeAll {
 
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\eventgrid-subscription.json"
 
   }
@@ -12,8 +12,8 @@ Describe "Event Grid Subscription Tests" -Tag "Acceptance" {
     BeforeAll {
 
       $TemplateParameters = @{
-        eventgridTopicName        = "dfc-foo-bar-egt"
-        eventgridSubscriptionName = "dfc-foo-bar-egs"
+        eventgridTopicName        = "prg-foo-bar-egt"
+        eventgridSubscriptionName = "prg-foo-bar-egs"
         eventGridSubscriptionUrl  = "https://foo.bar"
       }
 

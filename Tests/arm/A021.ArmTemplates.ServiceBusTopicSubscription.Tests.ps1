@@ -2,7 +2,7 @@
 Describe "Service Bus Topic Subscription Deployment Tests" -Tag "Acceptance" {
   BeforeAll {
     # common variables
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\ServiceBus\servicebus-topic-subscription.json"
     
   }
@@ -11,7 +11,7 @@ Describe "Service Bus Topic Subscription Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        serviceBusNamespaceName         = "dfc-foo-bar-ns"
+        serviceBusNamespaceName         = "prg-foo-bar-ns"
         serviceBusTopicName             = "topic-name"
         serviceBusTopicSubscriptionName = "subname"
       }

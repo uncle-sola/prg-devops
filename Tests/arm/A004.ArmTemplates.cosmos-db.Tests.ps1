@@ -3,14 +3,14 @@
 Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
   BeforeAll {
-    $ResourceGroupName = "dfc-test-template-rg"
+    $ResourceGroupName = "prg-test-template-rg"
     $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\cosmos-db.json"
   }
 
   Context "Deploying Cosmos DB with SQL API, Eventual consistency" {
     BeforeAll {
       $TemplateParameters = @{
-        cosmosDbName            = "dfc-foo-bar-cdb-01"
+        cosmosDbName            = "prg-foo-bar-cdb-01"
         cosmosApiType           = "SQL"
         defaultConsistencyLevel = "Eventual"
       }
@@ -33,7 +33,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        cosmosDbName            = "dfc-foo-bar-cdb-02"
+        cosmosDbName            = "prg-foo-bar-cdb-02"
         cosmosApiType           = "Gremlin"
         defaultConsistencyLevel = "Session"
       }
@@ -55,7 +55,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
   Context "Deploying Cosmos DB with MongoDB API, BoundedStaleness consistency" {
     BeforeAll {
       $TemplateParameters = @{
-        cosmosDbName            = "dfc-foo-bar-cdb-03"
+        cosmosDbName            = "prg-foo-bar-cdb-03"
         cosmosApiType           = "MongoDB"
         defaultConsistencyLevel = "BoundedStaleness"
       }
@@ -78,7 +78,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        cosmosDbName            = "dfc-foo-bar-cdb-04"
+        cosmosDbName            = "prg-foo-bar-cdb-04"
         cosmosApiType           = "Cassandra"
         defaultConsistencyLevel = "Strong"
       }
@@ -100,7 +100,7 @@ Describe "Key Vault Deployment Tests" -Tag "Acceptance" {
 
     BeforeAll {
       $TemplateParameters = @{
-        cosmosDbName            = "dfc-foo-bar-cdb-05"
+        cosmosDbName            = "prg-foo-bar-cdb-05"
         cosmosApiType           = "Table"
         defaultConsistencyLevel = "ConsistentPrefix"
       }

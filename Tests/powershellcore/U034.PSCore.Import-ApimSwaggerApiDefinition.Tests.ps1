@@ -7,7 +7,7 @@ Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
         # test wide mocks
         Mock Invoke-RestMethod -MockWith {
             # called only when downloading the swagger to local file, ie ParameterSetName="File"
-            return '{"swagger":"2.0","info":{"title":"mock API","version":"0.1.2"},"host":"dfc-foo-bar-fa.azurewebsites.net","basePath":"/","schemes":["https"]}'
+            return '{"swagger":"2.0","info":{"title":"mock API","version":"0.1.2"},"host":"prg-foo-bar-fa.azurewebsites.net","basePath":"/","schemes":["https"]}'
         }
         Mock New-AzApiManagementContext -MockWith {
             # always called
@@ -26,10 +26,10 @@ Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
         Mock Import-AzApiManagementApi # called at the end to import API with different paramters
 
         $BaseParameters = @{
-            ApimResourceGroup       = "dfc-foo-bar-rg"
-            InstanceName            = "dfc-foo-bar-apim"
+            ApimResourceGroup       = "prg-foo-bar-rg"
+            InstanceName            = "prg-foo-bar-apim"
             ApiName                 = "bar-api"
-            SwaggerSpecificationUrl = "https://dfc-foo-bar-fa.azurewebsites.net/swagger/json"
+            SwaggerSpecificationUrl = "https://prg-foo-bar-fa.azurewebsites.net/swagger/json"
             ApiPath                 = "bar"
         }
     }
@@ -44,7 +44,7 @@ Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
         Should -Invoke -CommandName New-AzApiManagementContext -Exactly 1 -Scope It
         Should -Invoke -CommandName Get-AzApiManagementApi -Exactly 1 -Scope It
         Should -Invoke -CommandName Get-AzApiManagementApiVersionSet -Exactly 0 -Scope It
-        Should -Invoke -CommandName Import-AzApiManagementApi -Exactly 1 -Scope It -ParameterFilter { $SpecificationUrl -eq "https://dfc-foo-bar-fa.azurewebsites.net/swagger/json" }
+        Should -Invoke -CommandName Import-AzApiManagementApi -Exactly 1 -Scope It -ParameterFilter { $SpecificationUrl -eq "https://prg-foo-bar-fa.azurewebsites.net/swagger/json" }
 
     }
 
@@ -76,7 +76,7 @@ Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
         Should -Invoke -CommandName New-AzApiManagementContext -Exactly 1 -Scope It
         Should -Invoke -CommandName Get-AzApiManagementApi -Exactly 1 -Scope It
         Should -Invoke -CommandName Get-AzApiManagementApiVersionSet -Exactly 1 -Scope It
-        Should -Invoke -CommandName Import-AzApiManagementApi -Exactly 1 -Scope It -ParameterFilter { $SpecificationUrl -eq "https://dfc-foo-bar-fa.azurewebsites.net/swagger/json" -and $ApiVersion -eq "v1" }
+        Should -Invoke -CommandName Import-AzApiManagementApi -Exactly 1 -Scope It -ParameterFilter { $SpecificationUrl -eq "https://prg-foo-bar-fa.azurewebsites.net/swagger/json" -and $ApiVersion -eq "v1" }
 
     }
 
@@ -84,10 +84,10 @@ Describe "Import-ApimSwaggerApiDefinition unit tests" -Tag "Unit" {
 
         # Because this may run within the same minute as the above download it would attempt to create the same filename if we used the same values
         $DownloadVersionedParameters = @{
-            ApimResourceGroup        = "dfc-foo-bar-rg"
-            InstanceName             = "dfc-foo-bar-apim"
+            ApimResourceGroup        = "prg-foo-bar-rg"
+            InstanceName             = "prg-foo-bar-apim"
             ApiName                  = "bar-api"
-            SwaggerSpecificationUrl  = "https://dfc-foo-bar-v2-fa.azurewebsites.net/swagger/json"
+            SwaggerSpecificationUrl  = "https://prg-foo-bar-v2-fa.azurewebsites.net/swagger/json"
             ApiPath                  = "bar"
             ApiVersionSetId          = "bar-api-versionset"
             ApiVersion               = "v2"
