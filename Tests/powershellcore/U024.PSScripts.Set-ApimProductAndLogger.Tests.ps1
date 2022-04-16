@@ -1,6 +1,6 @@
 Push-Location -Path $PSScriptRoot\..\..\PSCoreScripts\
 
-Describe "Set-ApimProductAndLogger unit tests" -Tag "Unit" {
+Describe "Set-ApimProductAndLogger unit tests" -Tag "DontRun" {
 
     BeforeEach {
         Mock New-AzApiManagementContext -MockWith { return @{} }
