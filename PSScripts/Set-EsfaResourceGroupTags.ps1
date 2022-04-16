@@ -37,7 +37,7 @@ param(
     [ValidateSet("Karis Ministries")]
     [string]$ParentBusiness,
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Karis Ministries Services")]
+    [ValidateSet("Karis Ministries Services", "Karis Ministries Services (PP)")]
     [string]$ServiceOffering
 )
 
