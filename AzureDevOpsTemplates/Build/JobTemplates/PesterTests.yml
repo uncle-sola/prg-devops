@@ -5,11 +5,11 @@ parameters:
   TestResultsFile: ''
   Tag: ''
   SetPesterScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Pester\Pester.ps1'
-  SetPesterScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Pester.ps1'
+  SetPesterScript: 'https://raw.githubusercontent.com/uncle-sola/prg-devops/master/Tests/Pester.ps1'
   SetPesterHelpScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Q001.Powershell.Help.Tests.ps1'
-  SetPesterHelpScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Q001.Powershell.Help.Tests.ps1'
+  SetPesterHelpScript: 'https://raw.githubusercontent.com/uncle-sola/prg-devops/master/Tests/Q001.Powershell.Help.Tests.ps1'
   SetPesterQualityScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Q002.Powershell.Quality.Tests.ps1'
-  SetPesterQualityScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Q002.Powershell.Quality.Tests.ps1'
+  SetPesterQualityScript: 'https://raw.githubusercontent.com/uncle-sola/prg-devops/master/Tests/Q002.Powershell.Quality.Tests.ps1'
 
  
 
