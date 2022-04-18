@@ -1,0 +1,56 @@
+parameters:
+  TestsPath: ''
+  ResultsPath: ''
+  CodeCoverageResultsFile: ''
+  TestResultsFile: ''
+  Tag: ''
+  SetPesterScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Pester\Pester.ps1'
+  SetPesterScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Pester.ps1'
+  SetPesterHelpScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Q001.Powershell.Help.Tests.ps1'
+  SetPesterHelpScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Q001.Powershell.Help.Tests.ps1'
+  SetPesterQualityScriptFilePath: '$(System.DefaultWorkingDirectory)\Tests\Q002.Powershell.Quality.Tests.ps1'
+  SetPesterQualityScript: 'https://raw.githubusercontent.com/olusola-adio/prg-devops/master/Tests/Q002.Powershell.Quality.Tests.ps1'
+
+ 
+
+jobs:
+- job: Pester
+  displayName: Pester Code Quality Tests
+  pool:
+    vmImage: 'windows-latest'
+  workspace:
+      clean: all
+  steps:
+  - task: PowerShell@2
+    name: DownloadPesterScript
+    displayName: 'Download Pester PS script'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterScript }} -OutFile ${{ parameters.SetPesterScriptFilePath }}
+  - task: PowerShell@2
+    name: DownloadPesterHelpScript
+    displayName: 'Download Pester Help Test'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterHelpScript }} -OutFile ${{ parameters.SetPesterHelpScriptFilePath }}
+  - task: PowerShell@2
+    name: DownloadPesterQualityScript
+    displayName: 'Download Pester Quality Test'
+    inputs:
+      targetType: 'inline'
+      script: Invoke-WebRequest -Uri ${{ parameters.SetPesterQualityScript }} -OutFile ${{ parameters.SetPesterQualityScriptFilePath }}
+  - task: PowerShell@2
+    displayName: 'Executing Pester Tests'
+    inputs:
+      filePath: '$(System.DefaultWorkingDirectory)\tests\Pester\Pester.ps1'
+      workingDirectory: '$(Build.SourcesDirectory)'
+      arguments: '-TestsPath $(Build.SourcesDirectory)\${{ parameters.TestsPath }} -ResultsPath $(System.DefaultWorkingDirectory)\${{ parameters.ResultsPath }} -Publish -TestResultsFile ${{ parameters.TestResultsFile }} -CodeCoverageResultsFile ${{ parameters.CodeCoverageResultsFile }} -Tag ${{ parameters.Tag }}'
+      errorActionPreference: 'silentlyContinue'
+      ignoreLASTEXITCODE: true
+  - task: PublishTestResults@2
+    displayName: 'Publish Pester Tests'
+    inputs:
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '**/${{ parameters.TestResultsFile }}'
+      mergeTestResults: true
+      failTaskOnFailedTests: true
