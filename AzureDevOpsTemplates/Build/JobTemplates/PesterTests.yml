@@ -1,9 +1,9 @@
 parameters:
-  TestsPath: ''
-  ResultsPath: ''
+  TestsPath: 'tests'
+  ResultsPath: 'Publish'
   CodeCoverageResultsFile: ''
   TestResultsFile: ''
-  Tag: ''
+  Tag: 'Quality'
   SetPesterScriptFilePath: '$(System.DefaultWorkingDirectory)\Pester.ps1'
   SetPesterScript: 'https://raw.githubusercontent.com/uncle-sola/prg-devops/master/Tests/Pester.ps1'
   SetPesterHelpScriptFilePath: '$(System.DefaultWorkingDirectory)\Q001.Powershell.Help.Tests.ps1'
