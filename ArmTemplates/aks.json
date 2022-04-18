@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "clusterName": {
@@ -23,6 +23,9 @@
                 "description": "The name of the resource group used for nodes"
             }
         },
+        "rbacTenantId": {
+            "type": "string"
+        },
         "serviceCidr": {
             "type": "string"
         },
@@ -44,7 +47,7 @@
                 "description": "Name of the existing VNET resource group"
             }
         },
-        "agentNodeCount1": {
+        "agentNodeCount": {
             "type": "int",
             "defaultValue": 2,
             "metadata": {
@@ -53,41 +56,18 @@
             "minValue": 1,
             "maxValue": 50
         },
-        "agentNodeCount2": {
-            "type": "int",
-            "defaultValue": 4,
-            "metadata": {
-                "description": "The number of nodes for the cluster."
-            },
-            "minValue": 1,
-            "maxValue": 50
-        },
-        "agentPoolName1": {
+        "agentPoolName": {
             "type": "string",
-            "defaultValue": "systempool",
+            "defaultValue": "agentpool",
             "metadata": {
-                "description": "The name of the default system agent pool"
+                "description": "The name of the default agent pool"
             }
         },
-        "agentPoolName2": {
+        "agentVMSize": {
             "type": "string",
-            "defaultValue": "apppool",
+            "defaultValue": "Standard_DS2_v2",
             "metadata": {
-                "description": "The name of the default app agent pool"
-            }
-        },
-        "agent1VMSize": {
-            "type": "string",
-            "defaultValue": "Standard_D4s_v3",
-            "metadata": {
-                "description": "The sku of the machines that will be used for the system agentpool."
-            }
-        },
-        "agent2VMSize": {
-            "type": "string",
-            "defaultValue": "Standard_DS12_v2",
-            "metadata": {
-                "description": "The sku of the machines that will be used for the app agentpool."
+                "description": "The sku of the machines that will be used for the default agentpool."
             }
         },
         "dockerBridgeCidr": {
@@ -112,14 +92,13 @@
             "type": "string",
             "defaultValue": "10.244.0.0/16"
         },
-        "AADadminGroupObjectIDs": {
-            "type": "array",
+        "aadProfileAdminGroupObjectIDs": {
             "defaultValue": [],
+            "type": "array",
             "metadata": {
-                "description": "An array of AAD group object ids to give administrative access."
+                "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
             }
         }
-
     },
     "variables": {
         "vnetSubnetId": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'),parameters('subnetName'))]",
@@ -135,11 +114,10 @@
                 }
             }
         }
-
     },
     "resources": [
         {
-            "apiVersion": "2020-09-01",
+            "apiVersion": "2020-07-01",
             "type": "Microsoft.ContainerService/managedClusters",
             "location": "[resourceGroup().location]",
             "name": "[parameters('clusterName')]",
@@ -148,50 +126,28 @@
                 "dnsPrefix": "[parameters('clusterName')]",
                 "agentPoolProfiles": [
                     {
-                        "name": "[parameters('agentPoolName1')]",
-                        "count": "[parameters('agentNodeCount1')]",
-                        "vmSize": "[parameters('agent1VMSize')]",
+                        "name": "[parameters('agentPoolName')]",
+                        "count": "[parameters('agentNodeCount')]",
+                        "vmSize": "[parameters('agentVMSize')]",
                         "osType": "Linux",
                         "vnetSubnetID": "[variables('vnetSubnetID')]",
                         "type": "VirtualMachineScaleSets",
                         "storageProfile": "ManagedDisks",
-                        "mode": "System",
-                        "maxPods": 30,
-                        "availabilityZones": [
-                            "1",
-                            "2",
-                            "3"
-                        ]
-                    },
-                    {
-                        "name": "[parameters('agentPoolName2')]",
-                        "count": "[parameters('agentNodeCount2')]",
-                        "vmSize": "[parameters('agent2VMSize')]",
-                        "osType": "Linux",
-                        "vnetSubnetID": "[variables('vnetSubnetID')]",
-                        "type": "VirtualMachineScaleSets",
-                        "storageProfile": "ManagedDisks",
-                        "mode": "System",
-                        "maxPods": 40,
-                        "availabilityZones": [
-                            "1",
-                            "2",
-                            "3"
-                        ]
+                        "mode": "System"
                     }
                 ],
                 "addonProfiles": "[if(equals(parameters('logAnalyticsWorkspaceName'), ''), variables('addOnObject').noAddons, variables('addOnObject').omsAddon)]",
                 "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
                 "enableRBAC": true,
+                "aadProfile":  {
+                    "managed": true,
+                    "tenantId": "[parameters('rbacTenantId')]",
+                    "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]"
+                },
                 "servicePrincipalProfile": {
                     "clientId": "msi"
                 },
-                "aadProfile": {
-                    "managed": true,
-                    "adminGroupObjectIDs" : "[parameters('AADadminGroupObjectIDs')]"
-                },
                 "networkProfile": {
-                    "loadBalancerSku": "standard",
                     "networkPlugin": "kubenet",
                     "serviceCidr": "[parameters('serviceCidr')]",
                     "dnsServiceIP": "[parameters('dnsServiceIp')]",
