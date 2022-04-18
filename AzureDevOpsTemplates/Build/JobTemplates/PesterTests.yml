@@ -56,7 +56,7 @@ jobs:
     inputs:
       Contents: '*.Tests.ps1'
       TargetFolder: '$(System.DefaultWorkingDirectory)\Tests'
-      SourceFolder: $(System.SourcesDirectory)\Tests  
+      SourceFolder: Tests  
   - task: PowerShell@2
     displayName: 'Executing Pester Tests'
     inputs:
