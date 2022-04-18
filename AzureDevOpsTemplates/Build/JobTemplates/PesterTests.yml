@@ -44,13 +44,19 @@ jobs:
     inputs:
       Contents: Pester.ps1
       TargetFolder: '$(System.DefaultWorkingDirectory)\Tests\Pester'
-      SourceFolder: $(System.DefaultWorkingDirectory)  
+      SourceFolder: $(System.DefaultWorkingDirectory)
   - task: CopyFiles@2
     displayName: 'Copy Test Scripts'
     inputs:
       Contents: '*.Tests.ps1'
       TargetFolder: '$(System.DefaultWorkingDirectory)\Tests'
       SourceFolder: $(System.DefaultWorkingDirectory)  
+  - task: CopyFiles@2
+    displayName: 'Copy Local Scripts'
+    inputs:
+      Contents: '*.Tests.ps1'
+      TargetFolder: '$(System.DefaultWorkingDirectory)\Tests'
+      SourceFolder: $(System.SourcesDirectory)\Tests  
   - task: PowerShell@2
     displayName: 'Executing Pester Tests'
     inputs:
