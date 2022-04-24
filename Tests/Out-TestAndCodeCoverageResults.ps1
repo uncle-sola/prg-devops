@@ -36,6 +36,7 @@ if (-not $TestResultFile) {
         Select-Object -First 1
     $TestResultFile = $FindRecentFile.FullName
 }
+Write-Output "TestResultFile = $TestResultFile"
 [xml] $TestResult = Get-Content -Path $TestResultFile
 
 if (-not $CodeCoverageFile) {
@@ -45,6 +46,7 @@ if (-not $CodeCoverageFile) {
         Select-Object -First 1
     $CodeCoverageFile = $FindRecentFile.FullName
 }
+Write-Output "CodeCoverageFile = $CodeCoverageFile"
 [xml] $CodeCoverage = Get-Content -Path $CodeCoverageFile
 
 
