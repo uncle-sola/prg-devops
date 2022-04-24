@@ -13,8 +13,6 @@ resources:
 
 pool:
   name: "MyPrivatePool"
-workspace:
-  clean: all
 trigger:
   branches:
     include:

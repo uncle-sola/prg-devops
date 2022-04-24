@@ -10,6 +10,8 @@ parameters:
 jobs:
 - job: ${{ parameters.TestName }}
   displayName: 'Run ${{ parameters.TestType }} tests'
+  workspace:
+    clean: all
   steps:
   - task: DeleteFiles@1
     displayName: 'Remove old test and code coverage files'
