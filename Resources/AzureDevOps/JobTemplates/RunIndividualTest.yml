@@ -20,6 +20,16 @@ jobs:
       Contents: |
         **/TEST-${{ parameters.ResultsFileSuffix }}.xml
         **/CODECOVERAGE-${{ parameters.ResultsFileSuffix }}.xml
+  - task: PowerShell@2
+    displayName: 'Import-Module -Name Az.Resources'
+    inputs:
+      targetType: inline
+      script: 'Import-Module -Name Az.Resources -Scope Local' # Required when targetType == Inline
+  - task: PowerShell@2
+    displayName: 'Import-Module -Name Az.KeyVault'
+    inputs:
+      targetType: inline
+      script: 'Import-Module -Name Az.KeyVault -Scope Local' # Required when targetType == Inline
   # - task: PowerShell@2
   #   displayName: 'Install-Module -Name Az.Storage'
   #   inputs:
