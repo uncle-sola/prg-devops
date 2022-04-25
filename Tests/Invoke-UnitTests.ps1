@@ -26,7 +26,7 @@ try {
     if (!$pesterModule) {
         try {
             Write-Host "Installing Pester"
-            Install-Module -Name Pester -Force -SkipPublisherCheck -MinimumVersion "5.0.0"
+            Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck -MinimumVersion "5.0.0"
             Write-Host "Getting Pester version"
             $pesterModule = Get-Module -Name Pester -ListAvailable | Where-Object { $_.Version -like '5.*' }
         }
@@ -36,8 +36,6 @@ try {
     }
 
     $pesterModule | Import-Module
-
-
 
     $pathToTests = "$PSScriptRoot\powershell5_1"
     $pathToScripts = "$PSScriptRoot\..\PSScripts\*.ps1"
