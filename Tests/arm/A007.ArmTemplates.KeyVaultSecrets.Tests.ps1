@@ -22,7 +22,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
 
   
     It "Should be deployed successfully" {
-      $output = Test-AzurRmResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
     }
 
