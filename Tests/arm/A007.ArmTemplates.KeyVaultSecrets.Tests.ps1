@@ -8,7 +8,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
 
   Context "When a single key vault secret added" {
 
-    BeforeAll{
+    BeforeAll {
       $TemplateParameters = @{
         keyVaultName = "prg-foo-bar-kv"
         secrets      = [Newtonsoft.Json.JsonConvert]::DeserializeObject('[{ "name": "foo", "secret": "bar", "type": "" }]')
@@ -18,18 +18,18 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
         TemplateFile            = $TemplateFile
         TemplateParameterObject = $TemplateParameters
       }
-      }
+    }
 
   
     It "Should be deployed successfully" {
-      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
     }
 
   }
 
   Context "When a multiple secrets added" {
-    BeforeAll{
+    BeforeAll {
       $TemplateParameters = @{
         keyVaultName = "prg-foo-bar-kv"
         secrets      = [Newtonsoft.Json.JsonConvert]::DeserializeObject('[{ "name": "foo", "secret": "bar", "type": "" },
@@ -43,7 +43,7 @@ Describe "Key Vault Secrets Deployment Tests" -Tag "Acceptance" {
     }
      
     It "Should be deployed successfully" {
-      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
     }
 
