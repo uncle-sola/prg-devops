@@ -23,7 +23,7 @@ Describe "Service Bus Topic Subscription Deployment Tests" -Tag "Acceptance" {
     }
 
     It "Should be deployed successfully with just a subscription"  {
-      $output = Test-AzResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
 
       $output | Should -Be $null
       if ($output) {
@@ -35,7 +35,7 @@ Describe "Service Bus Topic Subscription Deployment Tests" -Tag "Acceptance" {
     It "Should be deployed successfully when the SQL filter is specified"  {
       $TestTemplateParams['subscriptionSqlFilter'] = "value = something"
 
-      $output = Test-AzResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
 
       $output | Should -Be $null
       if ($output) {

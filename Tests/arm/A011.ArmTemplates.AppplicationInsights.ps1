@@ -21,7 +21,7 @@ $TemplateFile = "$PSScriptRoot\..\..\ArmTemplates\application-insights.json"
       }
   
     It "Should be deployed successfully" {
-      $output = Test-AzResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
     }
 

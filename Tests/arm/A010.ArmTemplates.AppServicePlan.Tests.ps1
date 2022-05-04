@@ -20,7 +20,7 @@ Describe "App Service Plan Deployment Tests" -Tag "Acceptance" {
     }
  
     It "Should be deployed successfully" {
-      $output = Test-AzResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
     }
 

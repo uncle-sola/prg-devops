@@ -25,7 +25,7 @@ Describe "Service Bus Queue Authorization Rule (shared access policy) Deployment
     }
 
     It "Should be deployed successfully with just a subscription"  {
-      $output = Test-AzResourceGroupDeployment @TestTemplateParams
+      $output = Test-AzureRmResourceGroupDeployment @TestTemplateParams
       $output | Should -Be $null
 
       if ($output) {
